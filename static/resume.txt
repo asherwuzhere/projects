@@ -1,0 +1,15 @@
+Asher Lieberman
+Email: asherlieberman@gmail.com
+LinkedIn: linkedin.com/in/asherlieberman
+GitHub: github.com/asherwuzhere
+
+Experienced Python developer focused on automation, data analysis and AI.
+
+Skills:
+- Python, TensorFlow, PyTorch
+- Web scraping & data processing
+- REST APIs & automation scripting
+- Game AI and reinforcement learning
+
+Education:
+Bachelor of Science in Computer Science
