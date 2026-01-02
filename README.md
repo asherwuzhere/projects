@@ -10,49 +10,50 @@ Experienced Python developer focused on automation, data analysis and AI.
 This repository contains a mix of Python projects in AI, data analysis, automation, and game development. The folders cover different areas, including finance tools and interactive bots.
 
 ## Skills Used
-- Python scripting and automation
+- Python
 - Financial analysis with the `yfinance` API
 - Machine learning with TensorFlow
-- Local AI assistants with the Ollama model
+- Local AI assistants with the Ollama
 - Game AI and small GUI tools
-- Web apps with Flask
 
 ## Projects Overview
 
 ### AI
 Experiments with artificial intelligence and helper bots.
 - **Reinforcement Learning Backgammon** – neural agent trained with TensorFlow.
-- **Talking Number Guesser** – interactive guessing game with AI voice.
-- **Basic Local Chatbot** – minimal interface for Llama-based models.
-- **Task Assistant** – tool for summarization and brainstorming.
+- **Advanced Number Guesser** – interactive guessing game with AI voice.
+- **Basic Local Chatbot** – minimal interface for Llama models.
+- **Task Assistant** – AI tool for summarization and brainstorming.
 - **Coding Helper Bot** – AI debugger and code converter.
-- **Stock Prediction Network** – TensorFlow model for forecasting market moves.
+- **Stock Prediction Network** – TensorFlow model for predicting market moves.
 
 ### Finance API
-Tools that analyse market data using `yfinance` and `pandas`.
-- **Magic Formula Screener** – ranks S&P 500 companies by Joel Greenblatt’s formula.
-- **Piotroski F-Score Analyzer** – evaluates financial health of custom tickers.
+Tools that analyze market data using `yfinance` and `pandas`.
+- **Magic Formula** – ranks S&P 500 companies by Joel Greenblatt’s formula.
+- **Piotroski F-Score** – evaluates financial health of custom tickers.
 - **Batch F-Score Evaluator** – calculates scores across large symbol sets.
 - **Combined Screeners** – integrates EBIT/EV and ROIC with Piotroski metrics.
 - **Fixed Assets Variant** – adapts Magic Formula using asset-based measures.
 - **Growth-Adjusted F-Score** – modifies F-Score to account for expansion.
-- **Comprehensive F-Score Tool** – full implementation for hundreds of firms.
-- **Comprehensive Magic Formula Tool** – large-scale ranking of companies.
-- **Interactive F-Score Tool** – command-line input for custom analysis.
-- **Interactive Magic Formula Tool** – user-driven valuation analyzer.
-- **Legacy Versions** – earlier iterations of both F-Score and Magic Formula tools.
+- **Comprehensive F-Score Tool** – large-scale ranking of companies using F-Score.
+- **Comprehensive Magic Formula Tool** – large-scale ranking of companies using Magic Formula.
+- **Input F-Score Tool** – command-line input for custom analysis.
+- **Input Magic Formula Tool** – command-line input for Magic Formula.
+- **Older Versions** – earlier iterations of both F-Score and Magic Formula tools.
+
+Learn more about [F-Score](https://www.investopedia.com/terms/p/piotroski-score.asp) and [Magic Formula](https://www.investopedia.com/terms/m/magic-formula-investing.asp).
 
 ### Game Bots
-Scripts that provide simple AIs or utilities for popular games.
-- **Backgammon Bots** – heuristic move generators with doubling cube logic.
+Scripts that provide simple AIs for different games.
+- **Backgammon Bots** – move generator with doubling cube logic.
 - **Blackjack Advisors** – probability-based recommendations for play.
 - **File Sorter** – organizes code by category automatically.
-- **Poker Assistant** – hand strength calculator with strategy hints.
-- **Unbeatable Tic-Tac-Toe** – deterministic solver for the classic game.
-- **Wordle Solvers** – dynamic vs. static letter weighting strategies.
+- **Poker Assistant** – hand strength calculator.
+- **Unbeatable Tic-Tac-Toe** – solver for the classic game.
+- **Wordle Solvers** – dynamic vs. static letter weighting strategies to solve Wordle on hard-mode.
 
 ### Misc
-Utilities and data files used by the other projects.
+Data files used by the other projects.
 - **Market Data Collectors** – scripts to gather and prepare S&P 500 metrics.
 - **Ticker List** – compiled list of S&P 500 companies.
 - **Wordle Word List** – source of valid Wordle solutions.
