@@ -12,13 +12,13 @@ def generate_deck():
 # Validate player input
 def validate_hand_input(hand):
     deck = generate_deck()
-    return all(card in deck for card in hand)
+    return bool(hand) and len(hand) == len(set(hand)) and all(card in deck for card in hand)
 
 # Get player's hand input
 def get_player_hand():
     while True:
         hand = input("Enter your hand (e.g., 'ah kc'): ").lower().split()
-        if validate_hand_input(hand):
+        if len(hand) == 2 and validate_hand_input(hand):
             return hand
         print("Invalid hand. Please enter valid cards.")
 
@@ -26,7 +26,8 @@ def get_player_hand():
 def get_community_cards(stage):
     while True:
         cards = input(f"Enter the {stage} (e.g., 'ah kc td'): ").lower().split()
-        if validate_hand_input(cards):
+        expected = 3 if stage == "flop" else 1
+        if len(cards) == expected and validate_hand_input(cards):
             return cards
         print("Invalid input. Please enter valid cards.")
 
@@ -76,16 +77,19 @@ def pre_flop_advice(score):
 # Evaluate hand strength with community cards
 def evaluate_hand_with_community(hand, community):
     full_hand = hand + community
-    unique_ranks = {card[:-1] for card in full_hand}
-    unique_suits = {card[-1] for card in full_hand}
-    
-    if len(unique_ranks) <= 4:
+    ranks = [card[:-1] for card in full_hand]
+    suits = [card[-1] for card in full_hand]
+    unique_ranks = set(ranks)
+    unique_suits = set(suits)
+
+    rank_counts = sorted((ranks.count(rank) for rank in unique_ranks), reverse=True)
+    if rank_counts[0] >= 4:
         return "Very Strong Hand"
-    elif len(unique_ranks) <= 5:
+    elif rank_counts[0] == 3 or rank_counts.count(2) >= 2:
         return "Strong Hand"
-    elif len(unique_suits) == 1:
-        return "Flush Draw"
-    elif any(full_hand.count(r) == 2 for r in unique_ranks):
+    elif max(suits.count(suit) for suit in unique_suits) >= 4:
+        return "Flush or Flush Draw"
+    elif rank_counts[0] == 2:
         return "Pair or Two Pair"
     return "Weak Hand"
 
@@ -98,7 +102,7 @@ def poker_advice(hand, community):
         return "Bet aggressively. You are in a dominant position."
     elif evaluation == "Strong Hand":
         return "Raise or bet. You have a solid hand."
-    elif evaluation == "Flush Draw":
+    elif evaluation == "Flush or Flush Draw":
         return "Consider semi-bluffing. Your flush draw is strong."
     elif evaluation == "Pair or Two Pair":
         return "Call or raise if needed. You have a decent hand."
