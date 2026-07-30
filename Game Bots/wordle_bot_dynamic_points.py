@@ -1,9 +1,10 @@
 # The main difference between dynamic points and static points is that the dynamic points is based on the remain possible wordle answers shown in wordle_words.txt while static points uses letter frequency in the English language
 
-import random
 from collections import Counter
+from pathlib import Path
 # Load word list from file
-with open("wordle_words.txt", "r") as file:
+WORD_LIST_PATH = Path(__file__).resolve().parents[1] / "Misc" / "wordle_words.txt"
+with WORD_LIST_PATH.open(encoding="utf-8") as file:
     word_list = [line.strip().lower() for line in file]
 
 yes = [
@@ -98,6 +99,9 @@ while True:
         if feedback in w:
             print("CONGRATULATIONS, YOU GOT IT!")
             break
+        if len(feedback) != 5 or any(letter not in "GYB" for letter in feedback):
+            print("Feedback must contain exactly five letters using G, Y, and B.")
+            continue
         # Filter words based on feedback
         remaining_words = filter_words(remaining_words, first_guess, feedback)
         # Recalculate ranking based on remaining words
