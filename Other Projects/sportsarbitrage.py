@@ -1,6 +1,7 @@
 import requests
+import os
 
-API_KEY = "8483ad510693ded3a1610dba9ce063dc"
+API_KEY = os.getenv("ODDS_API_KEY")
 
 # ===============================
 # ALLOWED SPORTSBOOKS
@@ -148,21 +149,34 @@ sports = [
     "icehockey_nhl"
 ]
 
-for sport in sports:
-    url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
-    params = {
-        "apiKey": API_KEY,
-        "regions": "us",
-        "markets": "h2h,totals,spreads",
-        "oddsFormat": "american"
-    }
+def main():
+    if not API_KEY:
+        raise SystemExit("Set ODDS_API_KEY before running this program.")
+    for sport in sports:
+        url = f"https://api.the-odds-api.com/v4/sports/{sport}/odds"
+        params = {
+            "apiKey": API_KEY,
+            "regions": "us",
+            "markets": "h2h,totals,spreads",
+            "oddsFormat": "american"
+        }
+        try:
+            response = requests.get(url, params=params, timeout=20)
+            response.raise_for_status()
+            events = response.json()
+        except (requests.RequestException, ValueError) as exc:
+            print(f"Unable to fetch {sport}: {exc}")
+            continue
+        if not isinstance(events, list):
+            print(f"Unexpected response for {sport}: {events}")
+            continue
 
-    events = requests.get(url, params=params).json()
-    if not isinstance(events, list):
-        continue
+        for event in events:
+            for arb in process_event(event):
+                print_arb(sport, arb)
 
-    for event in events:
-        for arb in process_event(event):
+
+def print_arb(sport, arb):
             s1, s2 = arb["side1"], arb["side2"]
 
             print("\n===============================")
@@ -175,3 +189,7 @@ for sport in sports:
             print(f"  {s1[0]}: {p1:.2f}%")
             print(f"  {s2[0]}: {p2:.2f}%")
             print(f"\nProfit Margin: {arb['profit_pct']:.3f}%")
+
+
+if __name__ == "__main__":
+    main()
