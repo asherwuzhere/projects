@@ -26,7 +26,7 @@ class Backgammon:
         print(f"Borne Off: {self.borne_off}")
     
     def receive_dice_input(self, current_roll, opponent_last_roll, bot_last_roll):
-        if all(1 <= die <= 6 for die in current_roll):
+        if len(current_roll) == 2 and all(1 <= die <= 6 for die in current_roll):
             self.dice = list(current_roll) * 2 if current_roll[0] == current_roll[1] else list(current_roll)
             self.roll_history.append((self.turn, current_roll, opponent_last_roll, bot_last_roll))
         else:
@@ -100,8 +100,14 @@ if __name__ == "__main__":
     game = Backgammon()
     while max(game.borne_off.values()) < 15:
         game.display_board()
-        current_roll = tuple(map(int, input("Enter dice roll (e.g., 3 5): ").split()))
-        opponent_last_roll = tuple(map(int, input("Enter opponent's last roll (e.g., 2 6): ").split()))
-        bot_last_roll = tuple(map(int, input("Enter bot's last roll (e.g., 4 4): ").split()))
-        doubling_decision = game.play_turn(current_roll, opponent_last_roll, bot_last_roll)
+        try:
+            current_roll = tuple(map(int, input("Enter dice roll (e.g., 3 5): ").split()))
+            opponent_last_roll = tuple(map(int, input("Enter opponent's last roll (e.g., 2 6): ").split()))
+            bot_last_roll = tuple(map(int, input("Enter bot's last roll (e.g., 4 4): ").split()))
+            if len(opponent_last_roll) != 2 or len(bot_last_roll) != 2:
+                raise ValueError("Each roll must contain exactly two dice.")
+            doubling_decision = game.play_turn(current_roll, opponent_last_roll, bot_last_roll)
+        except ValueError as exc:
+            print(f"Invalid input: {exc}")
+            continue
         print(f"Doubling Decision: {doubling_decision}")
