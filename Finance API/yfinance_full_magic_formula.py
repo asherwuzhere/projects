@@ -1,4 +1,5 @@
 import yfinance as yf
+from pathlib import Path
 
 # List of company ticker symbols
 '''tickers = [
@@ -19,6 +20,12 @@ import yfinance as yf
     "HAS", "CLX", "WYNN", "BRO", "HRL", "BF.B", "A", "TPR", "TRMB", "ALB", "RCL", "CAG", "LW", "SEE", "ZION", "KMX", "BIO", "GPC", "L", "NWL", "IRM", "BBBY",
     "AVY", "AAP", "ALK", "CMA", "ETR", "EVRG", "LDOS", "NDSN", "PKG", "ROL", "RL", "SWK", "TXT", "VTR", "WRB", "XRAY", "YUM", "JNPR", "OGN", "LEG", "NI"
 ]'''
+tickers_path = Path(__file__).resolve().parents[1] / "Misc" / "s&p_500_tickers_real.txt"
+tickers = [
+    ticker.strip().replace(".", "-")
+    for ticker in tickers_path.read_text(encoding="utf-8").splitlines()
+    if ticker.strip()
+]
 # New list to store companies that pass filters
 qualified_companies = []
 
