@@ -3,7 +3,7 @@ from __future__ import annotations
 import os
 import time
 import datetime as dt
-from typing import Any, Dict, List, Set, Tuple, Optional
+from typing import Any, Dict, List, Set, Optional
 
 import requests
 
@@ -148,6 +148,8 @@ def main(days_ahead: int = 10, price_threshold: float = 1000.0) -> List[Dict[str
 
 
 if __name__ == "__main__":
+    if FINNHUB_KEY == "PUT_YOUR_KEY_HERE":
+        raise SystemExit("Set FINNHUB_API_KEY before running this program.")
     rows = main(days_ahead=10, price_threshold=1000.0)
     # Print as a simple table-ish output
     if not rows:
