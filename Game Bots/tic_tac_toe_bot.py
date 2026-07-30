@@ -79,12 +79,20 @@ def play_tic_tac_toe():
     
     for turn in range(9):
         if turn % 2 == 0:
-            move = int(input("Enter your move (1-9): "))
-            row, col = number_to_coords(move)
-            while (row, col) not in get_available_moves(board):
-                print("Invalid move, try again.")
-                move = int(input("Enter your move (1-9): "))
+            while True:
+                try:
+                    move = int(input("Enter your move (1-9): "))
+                except ValueError:
+                    print("Enter a whole number from 1 through 9.")
+                    continue
+                if move not in range(1, 10):
+                    print("Enter a whole number from 1 through 9.")
+                    continue
                 row, col = number_to_coords(move)
+                if (row, col) not in get_available_moves(board):
+                    print("That square is already occupied.")
+                    continue
+                break
             board[row][col] = human
         else:
             row, col = bot_move(board, turn, human, bot)
