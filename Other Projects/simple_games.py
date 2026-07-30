@@ -57,8 +57,15 @@ def tic_tac_toe():
         print_board(board)
         print(f"Player {players[turn % 2]}'s turn.")
         
-        row = int(input("Enter row (0, 1, 2): "))
-        col = int(input("Enter column (0, 1, 2): "))
+        try:
+            row = int(input("Enter row (0, 1, 2): "))
+            col = int(input("Enter column (0, 1, 2): "))
+        except ValueError:
+            print("Rows and columns must be numbers from 0 through 2.")
+            continue
+        if row not in range(3) or col not in range(3):
+            print("Rows and columns must be from 0 through 2.")
+            continue
         
         if board[row][col] != " ":
             print("Cell already taken, try again.")
@@ -92,6 +99,9 @@ def hangman():
         print("\n" + " ".join(guessed_word))
         guess = input(f"Guess a letter (Attempts left: {attempts}): ").lower()
         
+        if len(guess) != 1 or not guess.isalpha():
+            print("Enter one letter.")
+            continue
         if guess in guessed_letters:
             print("You already guessed that letter.")
             continue
@@ -128,7 +138,7 @@ def word_scramble():
 
 # Number Guessing Game
 def number_guessing_game():
-    print(f"\nWelcome to the Number Guessing Game!\n")
+    print("\nWelcome to the Number Guessing Game!\n")
 
     while True:
         # Set the range for the number
@@ -205,5 +215,5 @@ def main_menu():
         else:
             print("\nInvalid choice, please try again.")
 
-# Start the Game Hub
-main_menu()
+if __name__ == "__main__":
+    main_menu()

@@ -28,7 +28,7 @@ class Backgammon:
         print(f"Borne Off: {self.borne_off}")
     
     def receive_dice_input(self, dice_roll):
-        if all(1 <= die <= 6 for die in dice_roll):
+        if len(dice_roll) == 2 and all(1 <= die <= 6 for die in dice_roll):
             self.dice = list(dice_roll) * 2 if dice_roll[0] == dice_roll[1] else list(dice_roll)
             self.roll_history.append(dice_roll)
         else:
@@ -120,10 +120,12 @@ if __name__ == "__main__":
     game = Backgammon(user_first)
     if not user_first:
         opponent_dice_roll = tuple(map(int, input("Enter opponent's dice roll (e.g., 3 5): ").split()))
-        num_opponent_moves = 4 if len(opponent_dice_roll) == 4 else 2
+        num_opponent_moves = 4 if len(opponent_dice_roll) == 2 and opponent_dice_roll[0] == opponent_dice_roll[1] else 2
         opponent_moves = []
         for _ in range(num_opponent_moves):
             move = tuple(map(int, input("Enter opponent's move (start and end point, e.g., 12 17): ").split()))
+            if len(move) != 2:
+                raise SystemExit("Each move must contain a start and end point.")
             opponent_moves.append(move)
         game.apply_opponent_moves(opponent_moves)
     print("This bot will help you make the best moves in Backgammon. Roll your dice and enter the result to get the best move suggestion.")
@@ -132,4 +134,3 @@ if __name__ == "__main__":
         dice_roll = tuple(map(int, input("Enter your dice roll (e.g., 3 5): ").split()))
         doubling_decision = game.play_turn(dice_roll)
         print(f"Doubling Decision: {doubling_decision}")
-

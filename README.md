@@ -9,6 +9,32 @@ Experienced Python developer focused on automation, data analysis and AI.
 
 This repository contains a mix of Python projects in AI, data analysis, automation, and game development. The folders cover different areas, including finance tools and interactive bots.
 
+## Running the projects
+
+Use Python 3.10 or newer. Create a virtual environment and install dependencies:
+
+```bash
+python -m venv .venv
+source .venv/bin/activate  # Windows: .venv\Scripts\activate
+python -m pip install -r requirements.txt
+```
+
+Run a program from the repository root, for example:
+
+```bash
+python "Game Bots/tic_tac_toe_bot.py"
+```
+
+Programs using Ollama require a running local Ollama server and an installed model.
+`splits.py` requires `FINNHUB_API_KEY`; `sportsarbitrage.py` requires
+`ODDS_API_KEY`. Financial and weather programs require internet access.
+
+Run the deterministic test suite with:
+
+```bash
+python -m unittest discover -s tests
+```
+
 ## Skills Used
 - Python
 - Financial analysis with the `yfinance` API

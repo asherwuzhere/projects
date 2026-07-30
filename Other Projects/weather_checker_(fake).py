@@ -1,6 +1,5 @@
 import time
 import threading
-import random
 
 def show_loading_screen():
     loading_messages = [
@@ -23,14 +22,17 @@ def show_loading_screen():
         print()
 
 def weather_app():
-    user_input = input(f"\nEnter your current location: ")
+    location = input("\nEnter your current location: ").strip()
+    if not location:
+        print("A location is required.")
+        return
     print()
 
     loading_thread = threading.Thread(target=show_loading_screen)
     loading_thread.start()
     loading_thread.join()
 
-    print(f"\nIdk. Go outside for once and feel it for yourself.\n")
+    print(f"\nWeather for {location}: go outside and feel it for yourself.\n")
 
 if __name__ == "__main__":
     weather_app()
