@@ -3,7 +3,7 @@ import time
 
 def number_guessing_game():
     # Display the welcome message only once at the beginning
-    print(f"\nWelcome to the Number Guessing Game!")
+    print("\nWelcome to the Number Guessing Game!")
 
     while True:
         # Set the range for the number
@@ -51,5 +51,5 @@ def number_guessing_game():
             print("\nThanks for playing! Goodbye!")
             break
 
-# Start the game
-number_guessing_game()
+if __name__ == "__main__":
+    number_guessing_game()
